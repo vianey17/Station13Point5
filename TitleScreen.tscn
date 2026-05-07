@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgfudi1v648ev"]
+
+[ext_resource type="Texture2D" uid="uid://cne22x45owl1h" path="res://brackeys_platformer_assets/sprites/title_screen.png" id="1_fnlyl"]
+[ext_resource type="Script" uid="uid://y42q7b7jldvf" path="res://title_screen.gd" id="1_pkhjh"]
+[ext_resource type="FontFile" uid="uid://735us0erm277" path="res://brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="3_1xr1c"]
+[ext_resource type="AudioStream" uid="uid://cdqk2aeyjc38l" path="res://brackeys_platformer_assets/music/TitleScreen_ogg.ogg" id="4_tu0on"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tu0on"]
+font = ExtResource("3_1xr1c")
+font_size = 10
+font_color = Color(0.8901961, 0.8901961, 0.8901961, 1)
+
+[node name="TitleScreen" type="Node2D"]
+script = ExtResource("1_pkhjh")
+
+[node name="TitleScreen" type="Sprite2D" parent="."]
+position = Vector2(-4, 4)
+texture = ExtResource("1_fnlyl")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-5, -3)
+zoom = Vector2(4, 4)
+
+[node name="PressEtoStart" type="Label" parent="."]
+offset_left = -13.0
+offset_top = 37.0
+offset_right = 129.0
+offset_bottom = 60.0
+text = "Press E to start
+(audio recommended)"
+label_settings = SubResource("LabelSettings_tu0on")
+
+[node name="MainLevelBGAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_tu0on")
+volume_db = 0.82
+pitch_scale = 3.14
+autoplay = true
+max_distance = 1904.0
+panning_strength = 1.05
+parameters/looping = true

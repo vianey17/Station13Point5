@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bfdwd3t2ftxjf"]
+
+[ext_resource type="Script" uid="uid://btiwmdhhghc6" path="res://scenes/characters/character_base.gd" id="1_np3sr"]
+[ext_resource type="Texture2D" uid="uid://db4x0fttksbf" path="res://brackeys_platformer_assets/sprites/characters/characters.png" id="2_np3sr"]
+[ext_resource type="PackedScene" uid="uid://k2qfryo3qnmo" path="res://scenes/speech_bubble.tscn" id="3_qm5ft"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_np3sr"]
+size = Vector2(46, 48)
+
+[node name="CharacterBase" type="Area2D"]
+z_index = 1
+collision_mask = 2
+script = ExtResource("1_np3sr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+scale = Vector2(0.735, 0.735)
+texture = ExtResource("2_np3sr")
+region_enabled = true
+region_rect = Rect2(66.64847, 0, 28.974152, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_np3sr")
+
+[node name="speech_bubble" parent="." instance=ExtResource("3_qm5ft")]
+visible = false
+position = Vector2(38, -49)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

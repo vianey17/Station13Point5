@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://cdhghrudekhbg"]
+
+[ext_resource type="Script" uid="uid://cm440niw7pf12" path="res://scripts/radio.gd" id="1_7h80l"]
+[ext_resource type="Texture2D" uid="uid://i2teinqghv12" path="res://brackeys_platformer_assets/sprites/radio_on_off.png" id="2_ldjbc"]
+[ext_resource type="AudioStream" uid="uid://cgidfb3675yon" path="res://brackeys_platformer_assets/music/HappyBirthday.ogg" id="3_7h80l"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7h80l"]
+atlas = ExtResource("2_ldjbc")
+region = Rect2(4, 53, 51, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4b7o3"]
+atlas = ExtResource("2_ldjbc")
+region = Rect2(4, 1, 51, 46)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3mpwk"]
+animations = [{
+"frames": [{
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_7h80l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4b7o3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rwqht"]
+radius = 38.63635
+height = 81.818146
+
+[node name="Radio" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_7h80l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_3mpwk")
+autoplay = "default"
+frame_progress = 0.58359087
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.8800003, 0.8800003)
+shape = SubResource("CapsuleShape2D_rwqht")
+
+[node name="PuzzleAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_7h80l")
+volume_db = 0.66
+autoplay = true
+max_distance = 3000.0
+panning_strength = 1.05
+parameters/looping = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

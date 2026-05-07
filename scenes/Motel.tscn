@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cd3u21q7n3xl3"]
+
+[ext_resource type="Texture2D" uid="uid://b3t3n5cmln1ko" path="res://brackeys_platformer_assets/sprites/buildings1.png" id="1_2l2p6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlgqw"]
+size = Vector2(59.958298, 52)
+
+[node name="Motel" type="AnimatableBody2D"]
+visibility_layer = 5
+z_index = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2l2p6")
+region_enabled = true
+region_rect = Rect2(102.0386, 13.453433, 90.414986, 71.8176)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -9)
+scale = Vector2(1.4843651, 1)
+shape = SubResource("RectangleShape2D_nlgqw")

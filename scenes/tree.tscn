@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx5m0gpeeyia1"]
+
+[ext_resource type="Texture2D" uid="uid://dyyciy447mao1" path="res://brackeys_platformer_assets/sprites/trees_signs.png" id="1_avsvi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nlgqw"]
+size = Vector2(37.726566, 68)
+
+[node name="Tree" type="AnimatableBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_avsvi")
+region_enabled = true
+region_rect = Rect2(13.484367, 13.5145035, 55.40351, 68.64631)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-4.7683716e-07, -1)
+scale = Vector2(1.4843651, 1)
+shape = SubResource("RectangleShape2D_nlgqw")

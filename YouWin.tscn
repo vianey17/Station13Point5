@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://gkgjfyvfq2ry"]
+
+[ext_resource type="Script" uid="uid://cj2jtecpvdoh1" path="res://you_win.gd" id="1_bi7tr"]
+[ext_resource type="Texture2D" uid="uid://bj5b35gpedwkq" path="res://brackeys_platformer_assets/sprites/Tower.png" id="2_bi7tr"]
+[ext_resource type="FontFile" uid="uid://735us0erm277" path="res://brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="3_gw4gd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tu0on"]
+font = ExtResource("3_gw4gd")
+font_size = 10
+font_color = Color(0.8901961, 0.8901961, 0.8901961, 1)
+
+[node name="YouWin" type="Node2D"]
+script = ExtResource("1_bi7tr")
+
+[node name="Tower" type="Sprite2D" parent="."]
+position = Vector2(-9.000002, 22)
+scale = Vector2(0.255, 0.255)
+texture = ExtResource("2_bi7tr")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-5, -3)
+zoom = Vector2(4, 4)
+
+[node name="PressEtoStart" type="Label" parent="."]
+offset_left = -82.0
+offset_top = 19.0
+offset_right = 60.0
+offset_bottom = 42.0
+text = "Press E to go back to the title screen"
+label_settings = SubResource("LabelSettings_tu0on")
+autowrap_mode = 2
+
+[node name="escape" type="Label" parent="."]
+offset_left = -129.0
+offset_top = -27.0
+offset_right = 110.0
+offset_bottom = -4.0
+text = "You turned off the signals!
+"
+label_settings = SubResource("LabelSettings_tu0on")

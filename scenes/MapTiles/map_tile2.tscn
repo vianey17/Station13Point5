@@ -1,0 +1,98 @@
+[gd_scene load_steps=8 format=3 uid="uid://da6ik0j3rqdww"]
+
+[ext_resource type="Script" uid="uid://bfne6cqmlxhwj" path="res://scenes/MapTiles/map_tile_base.gd" id="1_llwx8"]
+[ext_resource type="Texture2D" uid="uid://dgxebxas8ln84" path="res://brackeys_platformer_assets/map_backgrounds/Map2.png" id="2_g0koy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_llwx8"]
+size = Vector2(37, 278)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_llwx8"]
+a = Vector2(-242, 132)
+b = Vector2(238, 136)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_g0koy"]
+a = Vector2(-241, 2)
+b = Vector2(-242, -276)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_gklpw"]
+a = Vector2(240, -134)
+b = Vector2(238, 140)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_8pq80"]
+a = Vector2(-244, -272)
+b = Vector2(241, -271)
+
+[node name="MapTile2" type="Node2D"]
+script = ExtResource("1_llwx8")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_g0koy")
+
+[node name="entry_north" type="Marker2D" parent="."]
+position = Vector2(-29, -122)
+
+[node name="entry_east" type="Marker2D" parent="."]
+position = Vector2(213, 19)
+
+[node name="map_collisions" type="StaticBody2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="map_collisions"]
+position = Vector2(0, -44)
+polygon = PackedVector2Array(13, -96, 21, -81, -10, -23, -2, -19, 6, -1, 78, 25, 149, 24, 244, 21, 248, -101)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="map_collisions"]
+polygon = PackedVector2Array(-242, -143, -77, -138, -82, -130, -75, -108, -75, -58, -88, -16, -88, 12, -60, 46, 18, 76, 132, 77, 244, 77, 246, 139, -248, 139)
+
+[node name="block_west" type="CollisionShape2D" parent="map_collisions"]
+position = Vector2(-264.5, -3)
+shape = SubResource("RectangleShape2D_llwx8")
+
+[node name="block_north" type="CollisionShape2D" parent="map_collisions"]
+position = Vector2(0, -159.83)
+scale = Vector2(13.155, 0.14)
+shape = SubResource("RectangleShape2D_llwx8")
+
+[node name="block_south" type="CollisionShape2D" parent="map_collisions"]
+position = Vector2(0, 159.11)
+scale = Vector2(13.155, 0.14)
+shape = SubResource("RectangleShape2D_llwx8")
+
+[node name="block_east" type="CollisionShape2D" parent="map_collisions"]
+position = Vector2(264, -3)
+shape = SubResource("RectangleShape2D_llwx8")
+
+[node name="borders" type="Node2D" parent="."]
+
+[node name="border_south" type="Area2D" parent="borders"]
+position = Vector2(3, 1)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="borders/border_south"]
+shape = SubResource("SegmentShape2D_llwx8")
+
+[node name="border_west" type="Area2D" parent="borders"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="borders/border_west"]
+position = Vector2(0, 138)
+shape = SubResource("SegmentShape2D_g0koy")
+
+[node name="border_east" type="Area2D" parent="borders"]
+position = Vector2(-1, 5)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="borders/border_east"]
+shape = SubResource("SegmentShape2D_gklpw")
+
+[node name="border_north" type="Area2D" parent="borders"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="borders/border_north"]
+position = Vector2(0, 136)
+shape = SubResource("SegmentShape2D_8pq80")
+
+[connection signal="body_entered" from="borders/border_south" to="." method="_on_border_south_body_entered"]
+[connection signal="body_entered" from="borders/border_west" to="." method="_on_border_west_body_entered"]
+[connection signal="body_entered" from="borders/border_east" to="." method="_on_border_east_body_entered"]
+[connection signal="body_entered" from="borders/border_north" to="." method="_on_border_north_body_entered"]

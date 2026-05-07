@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=3 uid="uid://2ddxsxlywiq4"]
+
+[ext_resource type="Script" uid="uid://bfne6cqmlxhwj" path="res://scenes/MapTiles/map_tile_base.gd" id="1_b7j6x"]
+[ext_resource type="Texture2D" uid="uid://co375h07mpe3s" path="res://brackeys_platformer_assets/map_backgrounds/Map5.png" id="2_b7j6x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5p6re"]
+size = Vector2(37, 278)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_pgthk"]
+a = Vector2(-244, -272)
+b = Vector2(241, -271)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_00m2r"]
+a = Vector2(-241, 2)
+b = Vector2(-242, -276)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_t42xg"]
+a = Vector2(-63.152267, 231.55086)
+b = Vector2(196.46118, 305.72543)
+
+[node name="MapTile1" type="Node2D"]
+script = ExtResource("1_b7j6x")
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("2_b7j6x")
+
+[node name="entry_north" type="Marker2D" parent="."]
+position = Vector2(27, -123)
+
+[node name="entry_south" type="Marker2D" parent="."]
+position = Vector2(-229, -34)
+
+[node name="entry_east" type="Marker2D" parent="."]
+position = Vector2(77, -128)
+
+[node name="entry_west" type="Marker2D" parent="."]
+position = Vector2(-228, -59)
+
+[node name="map_collisions" type="StaticBody2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="map_collisions"]
+position = Vector2(0, -44)
+polygon = PackedVector2Array(112, -97, 102, -73, 97, -45, 99, -22, 108, 2, 127, 34, 135, 49, 137, 66, 129, 86, 116, 101, 83, 116, 59, 125, 29, 130, 5, 130, -21, 126, -40, 125, -54, 120, -54, 127, -58, 137, -72, 147, -89, 148, -104, 144, -125, 137, -147, 111, -165, 90, -180, 66, -200, 42, -221, 28, -238, 26, -246, 22, -245, 183, 246, 183, 244, -97)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="map_collisions"]
+polygon = PackedVector2Array(-172, -89, -153, -71, -117, -54, -100, -54, -89, -75, -93, -99, -100, -115, -92, -130, -85, -138, -38, -139, -52, -124, -58, -113, -49, -98, -39, -82, -34, -72, -32, -49, -35, -25, -54, -6, -78, 4, -111, 1, -138, -7, -150, -23, -164, -43, -176, -61, -190, -77, -205, -90, -226, -100, -243, -104, -245, -139, -185, -139, -185, -122, -181, -109)
+
+[node name="block_west" type="CollisionShape2D" parent="map_collisions"]
+position = Vector2(-264.5, -3)
+shape = SubResource("RectangleShape2D_5p6re")
+
+[node name="block_north" type="CollisionShape2D" parent="map_collisions"]
+position = Vector2(0, -158.9)
+scale = Vector2(13.155, 0.14)
+shape = SubResource("RectangleShape2D_5p6re")
+
+[node name="block_south" type="CollisionShape2D" parent="map_collisions"]
+position = Vector2(0, 159.11)
+scale = Vector2(13.155, 0.14)
+shape = SubResource("RectangleShape2D_5p6re")
+
+[node name="block_east" type="CollisionShape2D" parent="map_collisions"]
+position = Vector2(264, -3)
+shape = SubResource("RectangleShape2D_5p6re")
+
+[node name="borders" type="Node2D" parent="."]
+
+[node name="border_south" type="Area2D" parent="borders"]
+position = Vector2(0, 270)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="borders/border_south"]
+position = Vector2(0, 138)
+shape = SubResource("SegmentShape2D_pgthk")
+
+[node name="border_west" type="Area2D" parent="borders"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="borders/border_west"]
+position = Vector2(0, 138)
+shape = SubResource("SegmentShape2D_00m2r")
+
+[node name="border_east" type="Area2D" parent="borders"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="borders/border_east"]
+position = Vector2(0, 136)
+rotation = -1.8453897
+shape = SubResource("SegmentShape2D_t42xg")
+
+[node name="border_north" type="Area2D" parent="borders"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="borders/border_north"]
+position = Vector2(0, 136)
+shape = SubResource("SegmentShape2D_pgthk")
+
+[connection signal="body_entered" from="borders/border_south" to="." method="_on_border_south_body_entered"]
+[connection signal="body_entered" from="borders/border_west" to="." method="_on_border_west_body_entered"]
+[connection signal="body_entered" from="borders/border_east" to="." method="_on_border_east_body_entered"]
+[connection signal="body_entered" from="borders/border_north" to="." method="_on_border_north_body_entered"]
